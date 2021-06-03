@@ -3,10 +3,9 @@ package config
 import (
 	"encoding/json"
 	"fmt"
+	molog "mongo-sync-elasticsearch/log"
 	"os"
 	"strings"
-
-	"mongo-sync-elasticsearch/log"
 )
 
 var configInstance Config
