@@ -110,18 +110,18 @@ func main() {
 
 	var latestoplog model.OpLog
 	if !exists || config.SyncType == service.SyncTypeFull {
-		//if config.SyncType != service.SyncTypeFull {
-		//	//开始同步之前找到最新的ts
-		//	filter := validOps()
-		//	opts := &options.FindOneOptions{}
-		//	opts.SetSort(bson.M{"$natural": -1})
-		//	err = localColl.FindOne(context.Background(), filter, opts).Decode(&latestoplog)
-		//	if err != nil {
-		//		molog.Errorf("find latest oplog.rs err:%v", err)
-		//		return
-		//	}
-		//	molog.Infof("get latest oplog.rs ts: %v", latestoplog.Timestamp)
-		//}
+		if config.SyncType != service.SyncTypeFull {
+			//开始同步之前找到最新的ts
+			filter := validOps()
+			opts := &options.FindOneOptions{}
+			opts.SetSort(bson.M{"$natural": -1})
+			err = localColl.FindOne(context.Background(), filter, opts).Decode(&latestoplog)
+			if err != nil {
+				molog.Errorf("find latest oplog.rs err:%v", err)
+				return
+			}
+			molog.Infof("get latest oplog.rs ts: %v", latestoplog.Timestamp)
+		}
 
 		//进行全量同步
 		coll := cli.Database(config.MongoDB).Collection(config.MongoColl)
