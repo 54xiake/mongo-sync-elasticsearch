@@ -1,6 +1,6 @@
 {
-  "mongodb": "yapi",
-  "mongocoll": "token",
+  "mongodb": "test",
+  "mongocoll": "user",
   "mongodburl": "mongodb://127.0.0.1:27017",
   "esurl": "http://127.0.0.1:9200",
   "tspath": "./",
